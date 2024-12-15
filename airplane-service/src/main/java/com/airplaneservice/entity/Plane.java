@@ -1,13 +1,12 @@
-package com.flightservice.entity;
+package com.airplaneservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import java.time.LocalDate;
+import java.util.List;
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "PLANE")

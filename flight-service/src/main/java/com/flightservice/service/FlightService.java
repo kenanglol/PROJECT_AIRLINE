@@ -12,7 +12,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FlightService {
     private final FlightRepository flightRepository;
-    private final PlaneService planeService;
     
     public Flight createFlight(Flight flight) {
         flight.setStatus(FlightStatus.SCHEDULED);
