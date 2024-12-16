@@ -3,7 +3,7 @@ package com.airline.userinfoservice.service.impl;
 import com.airline.userinfoservice.entity.User;
 import com.airline.userinfoservice.repository.UserRepository;
 import com.airline.userinfoservice.service.UserService;
-import com.airline.userinfoservice.config.SecurityConfig;
+import com.airline.userinfoservice.security.CustomPasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final SecurityConfig.CustomPasswordEncoder passwordEncoder;
+    private final CustomPasswordEncoder passwordEncoder;
 
     @Override
     public User createUser(User user) {
