@@ -43,4 +43,7 @@ public class Flight {
     
     @Column(name = "DELAY")
     private Integer delay;
+
+    @Column(name = "BOARDING_GATE")
+    private Integer boardingGate;
 } 

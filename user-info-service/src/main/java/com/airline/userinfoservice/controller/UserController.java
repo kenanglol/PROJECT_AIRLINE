@@ -2,6 +2,7 @@ package com.airline.userinfoservice.controller;
 
 import com.airline.userinfoservice.entity.User;
 import com.airline.userinfoservice.service.UserService;
+import com.airline.userinfoservice.dto.LoginRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +40,20 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            if (loginRequest.getEmail().contains("@")) {
+                User user = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
+                return ResponseEntity.ok(user);
+            } else {
+                User user = userService.loginWithUsername(loginRequest.getEmail(), loginRequest.getPassword());
+                return ResponseEntity.ok(user);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 } 

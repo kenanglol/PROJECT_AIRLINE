@@ -49,4 +49,7 @@ public class User {
     
     @Column(name = "NATIONALITY")
     private String nationality;
+    
+    @Column(length = 64)
+    private String salt;
 } 
