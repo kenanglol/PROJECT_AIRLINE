@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-        User user = userRepository.findByEmail(email)
+        User user = userRepository.findByMail(email)
             .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
         
         if (!passwordEncoder.matches(password, user.getPassword(), user.getSalt())) {

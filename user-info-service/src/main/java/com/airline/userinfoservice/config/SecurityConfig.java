@@ -10,8 +10,13 @@ import java.util.Base64;
 public class SecurityConfig {
     
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public CustomPasswordEncoder customPasswordEncoder() {
         return new CustomPasswordEncoder();
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return customPasswordEncoder();
     }
     
     public static class CustomPasswordEncoder implements PasswordEncoder {
