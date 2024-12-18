@@ -6,6 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.SequenceGenerator;
 import com.flightservice.enums.FlightStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,12 +21,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Flight {
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flight_seq")
+    @SequenceGenerator(name = "flight_seq", sequenceName = "flight_seq", allocationSize = 1)
     @Column(name = "FLIGHT_NO")
     private String flightNo;
     
-    @Column(name = "SCHEDULE")
-    private LocalDateTime schedule;
+    @Column(name = "SCHEDULE_ID")
+    private String scheduleId;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")

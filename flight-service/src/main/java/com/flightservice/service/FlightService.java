@@ -1,8 +1,10 @@
 package com.flightservice.service;
 
 import com.flightservice.entity.Flight;
+import com.flightservice.entity.FlightSchedule;
 import com.flightservice.enums.FlightStatus;
 import com.flightservice.repository.FlightRepository;
+import com.flightservice.repository.FlightScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FlightService {
     private final FlightRepository flightRepository;
+    private final FlightScheduleRepository flightScheduleRepository;
     
     public Flight createFlight(Flight flight) {
+        FlightSchedule schedule = flightScheduleRepository.findById(flight.getScheduleId())
+            .orElseThrow(() -> new RuntimeException("Flight Schedule not found with id: " + flight.getScheduleId()));
+            
         flight.setStatus(FlightStatus.SCHEDULED);
         return flightRepository.save(flight);
     }
@@ -24,9 +30,15 @@ public class FlightService {
         return flightRepository.save(flight);
     }
     
-    public Flight updateFlight(String flightNo, Flight flight) {
-        getFlight(flightNo); // kontrol için
-        flight.setFlightNo(flightNo);
+    public Flight updateFlight(String id, Flight flight) {
+        if (!flightRepository.existsById(id)) {
+            throw new RuntimeException("Flight not found with id: " + id);
+        }
+        
+        flightScheduleRepository.findById(flight.getScheduleId())
+            .orElseThrow(() -> new RuntimeException("Flight Schedule not found with id: " + flight.getScheduleId()));
+            
+        flight.setFlightNo(id);
         return flightRepository.save(flight);
     }
     
