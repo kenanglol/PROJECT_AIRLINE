@@ -6,8 +6,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/kenanglol/PROJECT_AIRLINE/tree/main/config-server
-          search-paths: config
+          uri: https://github.com/kenanglol/PROJECT_AIRLINE.git
+          default-label: main
+          search-paths: config-server/src/main/resources/config
   application:
     name: config-server 
 eureka:
