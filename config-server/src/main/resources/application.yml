@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/kenanglol/PROJECT_AIRLINE
+          uri: https://github.com/kenanglol/PROJECT_AIRLINE/tree/main/config-server
           search-paths: config
   application:
     name: config-server 
