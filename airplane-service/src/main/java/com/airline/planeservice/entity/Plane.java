@@ -1,8 +1,7 @@
 package com.airline.planeservice.entity;
 
 import java.time.LocalDate;
-import java.util.List;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

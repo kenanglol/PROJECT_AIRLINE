@@ -15,7 +15,7 @@
     <artifactId>plane-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>plane-service</name>
-    <description>Plane and Seat Management Service</description>
+    <description>Plane and Ticket Management Service</description>
     
     <properties>
         <java.version>17</java.version>
