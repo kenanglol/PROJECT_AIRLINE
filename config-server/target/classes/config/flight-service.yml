@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/flightdb
+    url: jdbc:postgresql://localhost:5432/AIRLINE
     username: postgres
     password: Tusty324
   jpa:
