@@ -1,7 +1,6 @@
 package com.airline.flightservice.service;
 
 import com.airline.flightservice.entity.Flight;
-import com.airline.flightservice.entity.FlightSchedule;
 import com.airline.flightservice.enums.FlightStatus;
 import com.airline.flightservice.repository.FlightRepository;
 import com.airline.flightservice.repository.FlightScheduleRepository;

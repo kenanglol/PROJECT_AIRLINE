@@ -29,7 +29,7 @@ public class Flight {
     private String flightNo;
     
     @Column(name = "SCHEDULE_ID")
-    private String scheduleId;
+    private Integer scheduleId;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")

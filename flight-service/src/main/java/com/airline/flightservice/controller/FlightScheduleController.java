@@ -21,7 +21,7 @@ public class FlightScheduleController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<FlightSchedule> getScheduleById(@PathVariable String id) {
+    public ResponseEntity<FlightSchedule> getScheduleById(@PathVariable Integer id) {
         return ResponseEntity.ok(flightScheduleService.getScheduleById(id));
     }
     
@@ -31,12 +31,12 @@ public class FlightScheduleController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<FlightSchedule> updateSchedule(@PathVariable String id, @RequestBody FlightSchedule schedule) {
+    public ResponseEntity<FlightSchedule> updateSchedule(@PathVariable Integer id, @RequestBody FlightSchedule schedule) {
         return ResponseEntity.ok(flightScheduleService.updateSchedule(id, schedule));
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSchedule(@PathVariable String id) {
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Integer id) {
         flightScheduleService.deleteSchedule(id);
         return ResponseEntity.ok().build();
     }

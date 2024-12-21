@@ -17,7 +17,7 @@ public class FlightScheduleService {
         return flightScheduleRepository.findAll();
     }
     
-    public FlightSchedule getScheduleById(String id) {
+    public FlightSchedule getScheduleById(Integer id) {
         return flightScheduleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Flight schedule not found"));
     }
@@ -26,7 +26,7 @@ public class FlightScheduleService {
         return flightScheduleRepository.save(schedule);
     }
     
-    public FlightSchedule updateSchedule(String id, FlightSchedule schedule) {
+    public FlightSchedule updateSchedule(Integer id, FlightSchedule schedule) {
         if (!flightScheduleRepository.existsById(id)) {
             throw new RuntimeException("Flight schedule not found");
         }
@@ -34,7 +34,7 @@ public class FlightScheduleService {
         return flightScheduleRepository.save(schedule);
     }
     
-    public void deleteSchedule(String id) {
+    public void deleteSchedule(Integer id) {
         flightScheduleRepository.deleteById(id);
     }
 } 
