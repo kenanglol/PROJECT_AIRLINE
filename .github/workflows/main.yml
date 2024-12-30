@@ -20,6 +20,27 @@ jobs:
         distribution: 'temurin'
         cache: maven
     
-    - name: Build and Test All Services
+    - name: Build and Test Config Server
       run: |
+        cd config-server
+        mvn clean verify
+        
+    - name: Build and Test Eureka Server
+      run: |
+        cd eureka-server
+        mvn clean verify
+        
+    - name: Build and Test Airplane Service
+      run: |
+        cd airplane-service
+        mvn clean verify
+        
+    - name: Build and Test Flight Service
+      run: |
+        cd flight-service
+        mvn clean verify
+        
+    - name: Build and Test User Info Service
+      run: |
+        cd user-info-service
         mvn clean verify 
