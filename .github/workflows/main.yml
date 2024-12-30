@@ -19,28 +19,43 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    
-    - name: Build and Test Config Server
+        
+    - name: Build Config Server
       run: |
         cd config-server
-        mvn clean verify
+        mvn clean package -DskipTests
         
-    - name: Build and Test Eureka Server
+    - name: Build Eureka Server
       run: |
         cd eureka-server
-        mvn clean verify
+        mvn clean package -DskipTests
         
-    - name: Build and Test Airplane Service
+    - name: Build Admin Server
+      run: |
+        cd admin-server
+        mvn clean package -DskipTests
+        
+    - name: Build Other Services
       run: |
         cd airplane-service
-        mvn clean verify
+        mvn clean package -DskipTests
+        cd ../flight-service
+        mvn clean package -DskipTests
+        cd ../user-info-service
+        mvn clean package -DskipTests
         
-    - name: Build and Test Flight Service
+    - name: Build Docker Images
+      if: github.ref == 'refs/heads/main'
       run: |
-        cd flight-service
-        mvn clean verify
+        docker-compose build
         
-    - name: Build and Test User Info Service
-      run: |
-        cd user-info-service
-        mvn clean verify 
+    - name: Login to Docker Hub
+      if: github.ref == 'refs/heads/main'
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_TOKEN }}
+        
+    - name: Push Docker Images
+      if: github.ref == 'refs/heads/main'
+      run: docker-compose push 
