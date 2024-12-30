@@ -55,14 +55,14 @@ jobs:
 
     - name: Install Docker Compose
       run: |
-        sudo apt-get update
-        sudo apt-get install -y docker-compose-plugin
-        docker compose version
+        sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        docker-compose version
 
     - name: Build Docker Images
       if: github.ref == 'refs/heads/main'
       run: |
-        docker compose build
+        docker-compose build
         
     - name: Login to Docker Hub
       if: github.ref == 'refs/heads/main'
@@ -73,4 +73,4 @@ jobs:
         
     - name: Push Docker Images
       if: github.ref == 'refs/heads/main'
-      run: docker compose push 
+      run: docker-compose push 
