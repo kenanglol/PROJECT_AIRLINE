@@ -1,11 +1,15 @@
 package com.airline.planeservice.controller;
 
+import com.airline.commons.entity.Ticket;
+import com.airline.planeservice.dto.TicketRequest;
+import com.airline.planeservice.dto.TicketResponse;
+import com.airline.planeservice.service.TicketService;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.airline.planeservice.entity.Ticket;
-import com.airline.planeservice.service.TicketService;
 
 import java.util.List;
 
@@ -17,8 +21,8 @@ public class TicketController {
     private final TicketService ticketService;
     
     @GetMapping
-    public List<Ticket> getAllTickets() {
-        return ticketService.getAllTickets();
+    public ResponseEntity<List<Ticket>> getAllTickets() {
+        return ResponseEntity.ok(ticketService.getAllTickets());
     }
     
     @GetMapping("/{ticketId}")
@@ -28,18 +32,28 @@ public class TicketController {
                 .orElse(ResponseEntity.notFound().build());
     }
     
-    @GetMapping("/plane/{flightNo}")
-    public List<Ticket> getTicketsByFlightNo(@PathVariable String flightNo) {
-        return ticketService.getTicketsByFlightNo(flightNo);
+    @GetMapping("/flight/{flightNo}")
+    public ResponseEntity<List<Ticket>> getTicketsByFlightNo(@PathVariable String flightNo) {
+        return ResponseEntity.ok(ticketService.getTicketsByFlightNo(flightNo));
     }
     
     @PostMapping
-    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
-        return ResponseEntity.ok(ticketService.createTicket(ticket));
+    public ResponseEntity<TicketResponse> createTicket(@Valid @RequestBody TicketRequest ticketRequest) {
+        return new ResponseEntity<>(ticketService.createTicket(ticketRequest), HttpStatus.CREATED);
     }
     
     @PutMapping("/{ticketId}")
-    public ResponseEntity<Ticket> updateTicket(@PathVariable String ticketId, @RequestBody Ticket ticket) {
+    public ResponseEntity<Ticket> updateTicket(
+            @PathVariable String ticketId,
+            @Valid @RequestBody TicketRequest ticketRequest) {
+        
+        Ticket ticket = Ticket.builder()
+                .flightNo(ticketRequest.getFlightNo())
+                .planeSeatId(ticketRequest.getPlaneSeatId())
+                .passengerName(ticketRequest.getPassengerName())
+                .price(ticketRequest.getPrice())
+                .build();
+                
         return ticketService.updateTicket(ticketId, ticket)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -47,7 +61,7 @@ public class TicketController {
     
     @DeleteMapping("/{ticketId}")
     public ResponseEntity<Void> deleteTicket(@PathVariable String ticketId) {
-        return ticketService.deleteTicket(ticketId)
+        return ticketService.deleteTicket(ticketId) 
                 ? ResponseEntity.ok().build()
                 : ResponseEntity.notFound().build();
     }

@@ -1,6 +1,6 @@
 package com.airline.planeservice.controller;
 
-import com.airline.planeservice.entity.Seat;
+import com.airline.commons.entity.Seat;
 import com.airline.planeservice.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

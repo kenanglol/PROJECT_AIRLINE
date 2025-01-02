@@ -1,6 +1,6 @@
 package com.airline.planeservice.service;
 
-import com.airline.planeservice.entity.Seat;
+import com.airline.commons.entity.Seat;
 
 import java.util.List;
 import java.util.Optional;

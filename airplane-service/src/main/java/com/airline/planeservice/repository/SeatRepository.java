@@ -2,7 +2,7 @@ package com.airline.planeservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.airline.planeservice.entity.Seat;
+import com.airline.commons.entity.Seat;
 
 import java.util.List;
 

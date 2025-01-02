@@ -1,6 +1,6 @@
 package com.airline.planeservice.service.impl;
 
-import com.airline.planeservice.entity.Plane;
+import com.airline.commons.entity.Plane;
 import com.airline.planeservice.repository.PlaneRepository;
 import com.airline.planeservice.service.PlaneService;
 import lombok.RequiredArgsConstructor;

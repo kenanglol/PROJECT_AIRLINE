@@ -1,4 +1,4 @@
-package com.airline.planeservice.entity;
+package com.airline.commons.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
