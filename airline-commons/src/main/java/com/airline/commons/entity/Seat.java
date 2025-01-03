@@ -33,7 +33,4 @@ public class Seat {
     
     @Column(name = "IS_EMERGENCY_EXIT", nullable = false)
     private Boolean isEmergencyExit = false;
-    
-    @Column(name = "SEAT_ID", nullable = false)
-    private Long seatId;
 } 

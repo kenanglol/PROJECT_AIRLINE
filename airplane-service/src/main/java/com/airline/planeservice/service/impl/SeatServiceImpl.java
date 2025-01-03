@@ -50,7 +50,7 @@ public class SeatServiceImpl implements SeatService {
     
     @Override
     public List<Seat> getAllActiveSeatsByPlaneNo(String planeNo) {
-        return seatRepository.findByPlaneNoAndIsActive(planeNo, true);
+        return seatRepository.findByPlaneNoAndActive(planeNo, true);
     }
     
     @Override

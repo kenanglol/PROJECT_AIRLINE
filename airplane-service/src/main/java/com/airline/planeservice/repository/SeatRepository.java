@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, String> {
     List<Seat> findByPlaneNo(String planeNo);
-    List<Seat> findByPlaneNoAndIsActive(String planeNo, Boolean isActive);
+    List<Seat> findByPlaneNoAndActive(String planeNo, Boolean active);
 } 
