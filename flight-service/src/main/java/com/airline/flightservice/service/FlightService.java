@@ -1,7 +1,7 @@
 package com.airline.flightservice.service;
 
-import com.airline.flightservice.entity.Flight;
-import com.airline.flightservice.enums.FlightStatus;
+import com.airline.commons.entity.Flight;
+import com.airline.commons.enums.FlightStatus;
 import com.airline.flightservice.repository.FlightRepository;
 import com.airline.flightservice.repository.FlightScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class FlightService {
     
     public Flight cancelFlight(String flightNo) {
         Flight flight = getFlight(flightNo);
-        flight.setStatus(FlightStatus.CANCELED);
+        flight.setStatus(FlightStatus.CANCELLED);
         return flightRepository.save(flight);
     }
     

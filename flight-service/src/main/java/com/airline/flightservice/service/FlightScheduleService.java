@@ -1,6 +1,6 @@
 package com.airline.flightservice.service;
 
-import com.airline.flightservice.entity.FlightSchedule;
+import com.airline.commons.entity.FlightSchedule;
 import com.airline.flightservice.repository.FlightScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

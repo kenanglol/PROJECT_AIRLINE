@@ -1,6 +1,6 @@
 package com.airline.flightservice.controller;
 
-import com.airline.flightservice.entity.FlightSchedule;
+import com.airline.commons.entity.FlightSchedule;
 import com.airline.flightservice.service.FlightScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

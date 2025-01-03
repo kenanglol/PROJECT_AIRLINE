@@ -138,16 +138,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.16.1</version>
-                <configuration>
-                    <includes>
-                        <include>com.airline:airline-commons</include>
-                    </includes>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project> 

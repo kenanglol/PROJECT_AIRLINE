@@ -1,8 +1,8 @@
 package com.airline.flightservice.controller;
 
-import com.airline.flightservice.entity.Flight;
+import com.airline.commons.entity.Flight;
 import com.airline.flightservice.service.FlightService;
-import com.airline.flightservice.enums.FlightStatus;
+import com.airline.commons.enums.FlightStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -19,6 +19,7 @@
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot-admin.version>3.2.1</spring-boot-admin.version>
+        <airline-commons.version>0.0.2-SNAPSHOT</airline-commons.version>
     </properties>
 
     <dependencies>
@@ -71,7 +72,9 @@
         <dependency>
             <groupId>com.airline</groupId>
             <artifactId>airline-commons</artifactId>
-            <version>${project.version}</version>
+            <version>${airline-commons.version}</version>
+            <scope>compile</scope>
+            <optional>false</optional>
         </dependency>
     </dependencies>
 

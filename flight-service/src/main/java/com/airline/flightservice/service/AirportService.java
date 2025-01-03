@@ -1,6 +1,6 @@
 package com.airline.flightservice.service;
 
-import com.airline.flightservice.entity.Airport;
+import com.airline.commons.entity.Airport;
 import com.airline.flightservice.repository.AirportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
