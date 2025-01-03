@@ -3,9 +3,11 @@ package com.airline.planeservice.service.impl;
 import com.airline.commons.entity.Ticket;
 import com.airline.commons.entity.Flight;
 import com.airline.commons.entity.Plane;
+import com.airline.commons.entity.Seat;
 import com.airline.planeservice.repository.TicketRepository;
 import com.airline.planeservice.service.TicketService;
 import com.airline.planeservice.service.PlaneService;
+import com.airline.planeservice.service.SeatService;
 import com.airline.planeservice.client.FlightFeignClient;
 import com.airline.planeservice.dto.TicketRequest;
 import com.airline.planeservice.dto.TicketResponse;
@@ -28,6 +30,7 @@ public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
     private final PlaneService planeService;
     private final FlightFeignClient flightFeignClient;
+    private final SeatService seatService;
     
     @Override
     public List<Ticket> getAllTickets() {
@@ -51,6 +54,14 @@ public class TicketServiceImpl implements TicketService {
             throw new ResourceNotFoundException("Uçuş bulunamadı: " + ticketRequest.getFlightNo());
         }
 
+        Optional<Seat> selectedSeat = seatService.getAllActiveSeatsByPlaneNo(flight.getPlaneNo())
+            .stream().filter(seat -> seat.getSeatRow().toString().concat(seat.getSeatLetter()).equals(ticketRequest.getPlaneSeatId()))
+            .findAny();
+
+        if (!selectedSeat.isPresent()) {
+            throw new InvalidRequestException("Geçersiz koltuk numarası: " + ticketRequest.getPlaneSeatId());
+        }
+
         boolean isReserved = ticketRepository.existsByFlightNoAndPlaneSeatId(
             ticketRequest.getFlightNo(), 
             ticketRequest.getPlaneSeatId()
@@ -60,19 +71,18 @@ public class TicketServiceImpl implements TicketService {
             throw new BusinessException("Bu koltuk zaten rezerve edilmiş: " + ticketRequest.getPlaneSeatId());
         }
 
-        Plane plane = planeService.getPlaneById(flight.getPlaneId());
-        if (ticketRequest.getPlaneSeatId() > plane.getTotalSeats()) {
-            throw new InvalidRequestException("Geçersiz koltuk numarası: " + ticketRequest.getPlaneSeatId());
-        }
+
 
         // Yeni bilet oluştur
-        Ticket ticket = Ticket.builder()
-                .ticketId(generateTicketId())
-                .flightNo(ticketRequest.getFlightNo())
-                .planeSeatId(ticketRequest.getPlaneSeatId())
-                .passengerName(ticketRequest.getPassengerName())
-                .price(ticketRequest.getPrice())
-                .build();
+        Ticket ticket = new Ticket();
+        ticket.setTicketId(generateTicketId());
+        ticket.setFlightNo(ticketRequest.getFlightNo());
+        ticket.setPlaneSeatId(ticketRequest.getPlaneSeatId().toString());
+        ticket.setUserId(ticketRequest.getPassengerId());
+        ticket.setHasInFlightEntertainment(false);
+        ticket.setBaggageCapInPlane(0);
+        ticket.setBaggageCapUnderPlane(0);
+        ticket.setHasFoodService(false);
 
         Ticket savedTicket = ticketRepository.save(ticket);
         return mapToTicketResponse(savedTicket);
@@ -107,8 +117,7 @@ public class TicketServiceImpl implements TicketService {
                 .ticketId(ticket.getTicketId())
                 .flightNo(ticket.getFlightNo())
                 .planeSeatId(ticket.getPlaneSeatId())
-                .passengerName(ticket.getPassengerName())
-                .price(ticket.getPrice())
+                .userId(ticket.getUserId())
                 .build();
     }
 } 

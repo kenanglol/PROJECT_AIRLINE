@@ -47,12 +47,14 @@ public class TicketController {
             @PathVariable String ticketId,
             @Valid @RequestBody TicketRequest ticketRequest) {
         
-        Ticket ticket = Ticket.builder()
-                .flightNo(ticketRequest.getFlightNo())
-                .planeSeatId(ticketRequest.getPlaneSeatId())
-                .passengerName(ticketRequest.getPassengerName())
-                .price(ticketRequest.getPrice())
-                .build();
+        Ticket ticket = new Ticket();
+        ticket.setFlightNo(ticketRequest.getFlightNo());
+        ticket.setPlaneSeatId(ticketRequest.getPlaneSeatId());
+        ticket.setUserId(ticketRequest.getPassengerId());
+        ticket.setHasInFlightEntertainment(ticketRequest.getHasInFlightEntertainment());
+        ticket.setBaggageCapInPlane(ticketRequest.getBaggageCapInPlane());
+        ticket.setBaggageCapUnderPlane(ticketRequest.getBaggageCapUnderPlane());
+        ticket.setHasFoodService(ticketRequest.getHasFoodService());
                 
         return ticketService.updateTicket(ticketId, ticket)
                 .map(ResponseEntity::ok)

@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, String> {
     List<Ticket> findByFlightNo(String flightNo);
-    boolean existsByFlightNoAndPlaneSeatId(String flightNo, Integer planeSeatId);
+    boolean existsByFlightNoAndPlaneSeatId(String flightNo, String planeSeatId);
 } 

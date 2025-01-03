@@ -18,13 +18,24 @@ public class TicketRequest {
     private String flightNo;
     
     @NotNull(message = "Koltuk numarası boş olamaz")
-    @Positive(message = "Koltuk numarası pozitif bir sayı olmalıdır")
-    private Integer planeSeatId;
+    private String planeSeatId;
     
-    @NotBlank(message = "Yolcu adı boş olamaz")
-    private String passengerName;
+    @NotBlank(message = "Yolcu id boş olamaz")
+    private String passengerId;
     
     @NotNull(message = "Bilet fiyatı boş olamaz")
     @Positive(message = "Bilet fiyatı pozitif bir sayı olmalıdır")
     private Double price;
+
+    @Builder.Default
+    private Boolean hasInFlightEntertainment = false;
+
+    @Builder.Default 
+    private Integer baggageCapInPlane = 8;
+
+    @Builder.Default
+    private Integer baggageCapUnderPlane = 15;
+
+    @Builder.Default
+    private Boolean hasFoodService = false;
 } 

@@ -23,7 +23,7 @@ public class Ticket {
     private String planeSeatId;
     
     @Column(name = "USER_ID")
-    private Integer userId;
+    private String userId;
     
     @Column(name = "HAS_IN_FLIGHT_ENTERTAINMENT")
     private Boolean hasInFlightEntertainment;;

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class TicketResponse {
     private String ticketId;
     private String flightNo;
-    private Integer planeSeatId;
-    private String passengerName;
-    private Double price;
+    private String planeSeatId;
+    private String userId;
 } 
